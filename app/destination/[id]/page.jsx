@@ -5,6 +5,7 @@ import Image from "next/image";
 import { LuCalendarDays, LuMapPin } from "react-icons/lu";
 import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa6";
+import DestinationEditModal from "@/app/components/DestinationEditModal";
 
 
 const DestinationDetailsPage = ({ params }) => {
@@ -45,7 +46,10 @@ const DestinationDetailsPage = ({ params }) => {
   return (
     <div className="max-w-7xl mx-auto" suppressHydrationWarning>
       <div className="mb-4 flex justify-end gap-3">
-        <FaEdit size={20} className="text-gray-500 cursor-pointer" />
+       <DestinationEditModal
+          destination={destination}
+          setDestination={setDestination}
+        />
         <FaTrash size={20} className="text-red-500 cursor-pointer" />
       </div>
       <Image
