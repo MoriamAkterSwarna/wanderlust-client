@@ -6,11 +6,14 @@ import { LuCalendarDays, LuMapPin } from "react-icons/lu";
 import { FaEdit } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa6";
 import DestinationEditModal from "@/app/components/DestinationEditModal";
+import { Button } from "@heroui/react";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 
 const DestinationDetailsPage = ({ params }) => {
   const [destination, setDestination] = useState(null);
-
+  const router = useRouter();
 
   useEffect(() => {
     const getDestination = async () => {
@@ -18,7 +21,7 @@ const DestinationDetailsPage = ({ params }) => {
 
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_BASE}/api/destinations/${id}`,
-       
+        
       );
 
       const data = await res.json();
@@ -42,6 +45,24 @@ const DestinationDetailsPage = ({ params }) => {
     price,
   } = destination;
 
+  const handleDelete = async () => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_BASE}/api/destinations/${_id}`,
+      {
+        method: "DELETE",
+      },
+    );
+    const data = await res.json();
+    console.log(data);
+
+    if (data.acknowledged) {
+      toast.success("Deleted successfully!");
+      router.replace("/destination");
+    }
+  };
+
+
+ 
   
   return (
     <div className="max-w-7xl mx-auto" suppressHydrationWarning>
@@ -50,7 +71,11 @@ const DestinationDetailsPage = ({ params }) => {
           destination={destination}
           setDestination={setDestination}
         />
-        <FaTrash size={20} className="text-red-500 cursor-pointer" />
+
+        <Button onClick={handleDelete} variant="danger-soft" className={" rounded-none"} >
+        
+        <FaTrash size={20} className="text-red-500 cursor-pointer" /> Delete
+        </Button>
       </div>
       <Image
         src={imageUrl}
