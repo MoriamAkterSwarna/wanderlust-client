@@ -8,7 +8,7 @@ const Navbar = () => {
   
 
   return (
-    <div className="flex justify-between items-center p-5 bg-white">
+    <div className="flex justify-between items-center p-5 bg-white" >
       <div className="flex gap-3">
         <Link  href={"/"}>Home</Link>
         <Link  href={"/destination"}>Destination</Link>
