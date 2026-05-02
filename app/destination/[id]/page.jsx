@@ -56,7 +56,7 @@ const DestinationDetailsPage = ({ params }) => {
     console.log(data);
 
     if (data.acknowledged) {
-      toast.success("Deleted successfully!");
+      toast.success("Destination deleted successfully!");
       router.replace("/destination");
     }
   };
